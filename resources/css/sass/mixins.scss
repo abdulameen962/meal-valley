@@ -1,0 +1,157 @@
+@mixin mp {
+    margin: 0;
+    padding: 0;
+}
+
+@mixin bm {
+    @include mp;
+    box-sizing: border-box;
+}
+
+@mixin link {
+    text-decoration: none;
+    color: $black;
+}
+
+@mixin border($color) {
+    border: 1px solid $color;
+}
+
+@mixin flex($what) {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    @if $what=="yes" {
+        flex-direction: column;
+    }
+}
+
+@mixin fsize($size) {
+    font-size: (10 + $size) * 1px;
+    @include respond(phone) {
+        font-size: (2 + $size) * 1px;
+    }
+}
+
+@mixin ahover {
+    &:hover {
+        color: $do;
+        transform: scale(1.2);
+    }
+}
+
+@mixin circle($x1, $x2, $x3, $x4, $x5, $x6) {
+    clip-path: $x1;
+    position: absolute;
+    top: $x2;
+    right: 0;
+    width: $x4;
+    height: $x5;
+    z-index: -2;
+    background: $x6;
+    @if $x3=="yes" {
+        left: 0;
+    }
+}
+
+@mixin socials {
+    i {
+        @include fsize(25);
+        padding: 15px 12px;
+        transition: all .3s ease-in-out;
+        cursor: pointer;
+        &:hover {
+            transform: scale(1.2);
+            color: rgba(#FFD700, .7);
+        }
+    }
+}
+
+@mixin header {
+    width: 58%;
+    display: flex;
+    @include fsize(25);
+    font-weight: 200;
+    font-family: saira;
+    @include respond(phone) {
+        @include fsize(19);
+        width: 90%;
+    }
+    .first {
+        color: $do;
+    }
+    .second {
+        color: rgba($black, .8);
+        padding-left: 8px;
+    }
+}
+
+@mixin input {
+    @include line;
+    border: none;
+    border-radius: 5px;
+}
+
+@mixin line {
+    outline: none;
+}
+
+@mixin respond ($breakpoint) {
+    @if $breakpoint==phone {
+        @media screen and (min-width: 0em) and (max-width: 36em) {
+            @content;
+        }
+    }
+    @if $breakpoint==phonex {
+        @media screen and (min-width: 17.5em) and (max-width: 36em) {
+            @content;
+        }
+    }
+    @if $breakpoint==mphone {
+        @media screen and (min-width: 20em) and (max-width: 36em) {
+            @content;
+        }
+    }
+    @if $breakpoint==lphone {
+        @media screen and (min-width: 23em) and (max-width: 36em) {
+            @content;
+        }
+    }
+    @if $breakpoint==tab {
+        @media screen and (min-width: 26.25em) and (max-width: 36em) {
+            @content;
+        }
+    }
+    @if $breakpoint==laptop {
+        @media screen and (min-width: 90em) and (max-width: 92.5em) {
+            @content;
+        }
+    }
+}
+
+.transition {
+    transition: all ease .5s;
+}
+
+.upper {
+    font-family: saira;
+    text-transform: uppercase;
+}
+
+$do:rgba(255, 215, 0, 0.8);
+$black:rgb(0, 0, 0);
+$pcolor: rgba(128, 128, 128, .05);
+@font-face {
+    font-family: roboto;
+    src: url("../css/fonts/Roboto-Light.ttf");
+}
+
+@font-face {
+    font-family: saira;
+    src: url("../css/fonts/Saira-VariableFont_wdth\,wght.ttf");
+}
+
+@font-face {
+    font-family: quick;
+    src: url("../css/fonts/Quicksand-Light.ttf");
+}

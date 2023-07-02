@@ -1,0 +1,645 @@
+* {
+    @include bm;
+    font-family: roboto;
+}
+
+body {
+    @include bm;
+    background-color: rgba(white, 0.3);
+    overflow-x: hidden;
+}
+
+nav {
+    display: flex;
+    padding-top: 20px;
+    position: sticky;
+    top: 0px;
+    z-index: 1;
+    transition: all .2s ease;
+    @include respond(phone) {
+        // @include border(blue);
+        justify-content: space-between;
+    }
+    h1 {
+        @include header;
+        padding-left: 100px;
+        @include respond(phone) {
+            padding-left: 7px;
+        }
+    }
+    &>ul {
+        @include mp;
+        width: 40%;
+        display: flex;
+        z-index: 2;
+        justify-content: center;
+        align-items: center;
+        @include respond(phone) {
+            width: 80%;
+            // @include border(blue);
+            justify-content: center;
+        }
+        >li {
+            display: inline-block;
+            padding-left: 30px;
+            list-style-type: none;
+            @include respond(phone) {
+                padding-left: 17px;
+            }
+            a {
+                @include link;
+                @include fsize(15);
+                @extend .transition;
+                @include respond(phone) {
+                    @include fsize(18);
+                }
+                &.button {
+                    @include fsize(5);
+                    padding: 10px 18px;
+                    background: $do;
+                    border-radius: 20px;
+                    @include respond(phone) {
+                        position: relative;
+                        bottom: 4px;
+                        padding: 8px 15px;
+                        display: none;
+                    }
+                    &:hover {
+                        filter: drop-shadow(0px 2px 30px rgba(0, 0, 0, 0.1));
+                        transform: scale(1.2);
+                        color: $black;
+                    }
+                    &:active {
+                        filter: none;
+                        transform: scale(1);
+                        color: $black;
+                    }
+                }
+                @include ahover;
+            }
+            button {
+                background: none;
+                border: none;
+                transition: all .5s ease;
+                @include fsize(15);
+                @include ahover;
+                cursor: pointer;
+                @include respond(phone) {
+                    @include fsize(18);
+                }
+                input {
+                    @extend .transition;
+                    width: 160px;
+                    height: 38px;
+                    border: none;
+                    outline: none;
+                    border-radius: 8px;
+                    @include respond(phone) {
+                        width: 90px;
+                        @include fsize(6);
+                        height: 32px;
+                    }
+                    &:placeholder-shown {
+                        padding-left: 10px;
+                        @include fsize(2);
+                        @include respond(phone) {
+                            @include fsize(5);
+                        }
+                    }
+                    &:focus {
+                        border: 2px solid rgba($do, 0.7);
+                    }
+                }
+            }
+        }
+    }
+    div.nav {
+        position: absolute;
+        background-color: rgba(#FFD700, .2);
+        left: 0;
+        top: 8%;
+        min-height: 100vh;
+        width: 100vw;
+        transition: all .8s ease;
+        z-index: -1;
+        ul {
+            padding: 130px 90px;
+            @include respond(phone) {
+                padding: 130px 75px;
+            }
+            li {
+                line-height: 85px;
+                @include respond(phone) {
+                    // @include border(green);
+                    width: 70vw;
+                }
+                list-style-type: none;
+                a {
+                    @include fsize(30);
+                    @include link;
+                    font-family: roboto;
+                    transition: all .5s ease;
+                    i {
+                        padding-right: 10px;
+                    }
+                    @include ahover;
+                    @include respond(phone) {
+                        @include fsize(22);
+                        // @include flex(no);
+                    }
+                }
+            }
+        }
+    }
+}
+
+div.home {
+    display: flex;
+    flex-wrap: wrap;
+    position: relative;
+    left: 6%;
+    top: 60px;
+    height: 100vh;
+    @include respond(phone) {
+        left: 0;
+        top: 55px;
+        // @include border(green);
+        height: 85vh;
+        justify-content: center;
+    }
+    div.left {
+        width: 50vw;
+        @include respond(phone) {
+            width: 100%;
+            @include flex(yes);
+        }
+        h2 {
+            width: 30vw;
+            font-weight: 400;
+            font-family: saira;
+            @include fsize(35);
+            @include respond(phone) {
+                width: 100%;
+                @include fsize(23);
+                text-align: center;
+            }
+        }
+        p {
+            @include fsize(12);
+            width: 42vw;
+            color: rgba($black, .4);
+            @include respond(phone) {
+                width: 100%;
+                text-align: center;
+                line-height: 20px;
+                @include fsize(13);
+            }
+        }
+        a {
+            padding: 12px 25px;
+            background: $black;
+            color: white;
+            text-decoration: none;
+            @include fsize(6);
+            border-radius: 25px;
+            position: relative;
+            top: 40px;
+            @include respond(phone) {
+                top: 15px;
+            }
+            &:hover {
+                filter: drop-shadow(1px 1px 17px rgba(0, 0, 0, 0.2));
+            }
+            &:active {
+                filter: none;
+            }
+        }
+        img {
+            @include mp;
+            position: relative;
+            top: 70px;
+            margin: 20px 15px;
+            width: 6vw;
+            height: 10vh;
+            @include respond(phone) {
+                height: 4vh;
+                width: 13vw;
+                top: 12px;
+            }
+        }
+    }
+    div.right {
+        width: 35vw;
+        @include respond(phone) {
+            // @include border(blue);
+            width: 100vw;
+            @include flex(no);
+            align-items: flex-start;
+        }
+        img {
+            position: relative;
+            bottom: 20px;
+            @include respond(phone) {
+                height: 55vh;
+                // @include border(blue);
+                transform: scale(0.45);
+                bottom: 95px;
+            }
+        }
+    }
+}
+
+div.circle {
+    @include circle( circle(50% at 82% 25%), 0, no, 55vw, 60vh, linear-gradient(185.12deg, rgba(255, 215, 0, 0.2) 10.62%, rgba(255, 255, 255, 0) 95.89%));
+    @include respond(phone) {
+        // left: 0;
+        @include circle( circle(50% at 82% 25%), 0, no, 185vw, 52vh, linear-gradient(185.12deg, rgba(255, 215, 0, 0.2) 10.62%, rgba(255, 255, 255, 0) 95.89%));
+    }
+}
+
+div.foods {
+    @include flex(yes);
+    h2 {
+        @include fsize(35);
+        font-weight: 100;
+        @extend .upper;
+        color: rgba($black, .7);
+        @include respond(phone) {
+            @include fsize(18);
+            text-align: center;
+        }
+    }
+    h4 {
+        color: rgba($black, .3);
+        @include fsize(10);
+        font-family: saira;
+        font-weight: 100;
+        text-transform: uppercase;
+        @include respond(phone) {
+            @include fsize(7);
+        }
+    }
+    &_main {
+        @include flex(no);
+        flex-wrap: wrap;
+        width: 90vw;
+        padding-bottom: 30px;
+        overflow: hidden;
+        justify-content: space-between;
+        div.section {
+            position: relative;
+            padding: 30px 40px;
+            background: rgba(white, .4);
+            @include flex(yes);
+            flex-wrap: wrap;
+            border-radius: 20px;
+            transition: all .5s ease;
+            cursor: pointer;
+            width: 25%;
+            @include respond(phone) {
+                justify-content: unset;
+                align-items: unset;
+                width: 80vw;
+            }
+            img {
+                transform: scale(0.8);
+            }
+            h3 {
+                @include fsize(15);
+                padding-top: 10px;
+                font-family: saira;
+                font-weight: 200;
+            }
+            p {
+                @include fsize(8);
+                text-align: center;
+                width: 18vw;
+            }
+            &:hover {
+                box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.1);
+                transform: translateY(10px);
+                transform: scale(1.01);
+            }
+        }
+    }
+}
+
+div.circle2 {
+    @include circle(circle(31.5% at 5% 100%), 135%, yes, 55vw, 50vh, linear-gradient(185.12deg, rgba(255, 215, 0, 0.2) 14.62%, rgba(255, 255, 255, 0) 95.89%))
+}
+
+div.testimonial {
+    @include flex(no);
+    height: 60vh;
+    position: relative;
+    top: 100px;
+    border-radius: 5px;
+    flex-wrap: wrap;
+    div.left {
+        width: 40vw;
+        height: 100%;
+        padding-bottom: 200px;
+        img {
+            transform: scale(0.85);
+        }
+    }
+    div.right {
+        margin-top: 20px;
+        width: 40vw;
+        height: 80%;
+        h2 {
+            @include fsize(25);
+            @extend .upper;
+            font-weight: 300;
+        }
+        &_main {
+            @include flex(no);
+            justify-content: space-between;
+            overflow: hidden;
+            div.testimonial-section {
+                width: 40vw;
+                position: relative;
+                margin-top: 20px;
+                h2 {
+                    @include fsize(25);
+                }
+                padding: 0px 390px 0px 0px;
+                div.testimonial-title {
+                    @include flex(no);
+                    justify-content: flex-start;
+                    width: 35vw;
+                    padding-bottom: 20px;
+                    div.testimonial-text {
+                        padding: 0px 0px 30px 10px;
+                        font-family: saira;
+                        h2 {
+                            font-weight: 200;
+                        }
+                        h4 {
+                            font-weight: 100;
+                            @include fsize(10);
+                        }
+                    }
+                }
+                p {
+                    width: 38vw;
+                    line-height: 25px;
+                    @include fsize(10);
+                }
+                div.stars {
+                    margin-top: 20px;
+                    display: flex;
+                    i {
+                        padding-left: 7px;
+                        color: $do;
+                        @include fsize(12);
+                    }
+                    p {
+                        margin-top: -20px;
+                        @include fsize(7);
+                        color: rgba($black, .4);
+                    }
+                }
+            }
+        }
+        div.controls {
+            transform: translate(290px, -10px);
+            width: 120px;
+            height: 50px;
+            @include flex(no);
+            justify-content: space-between;
+            div {
+                border-radius: 50%;
+                cursor: pointer;
+                width: 50px;
+                height: 50px;
+                @include flex(no);
+                box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.1);
+                &:hover {
+                    transform: scale(1.1);
+                    box-shadow: 0px 1px 18px rgba(0, 0, 0, 0.1);
+                }
+            }
+            button {
+                border: none;
+                cursor: pointer;
+                background: none;
+                @include fsize(15);
+                color: rgba($black, .7);
+            }
+        }
+    }
+}
+
+div.circle3 {
+    @include circle(circle(53.7% at 100% 0), 182%, no, 80vw, 30vh, linear-gradient(184.12deg, rgba(255, 215, 0, 0.1) 10.62%, rgba(255, 255, 255, 0) 95.89%))
+}
+
+div.contact {
+    width: 100%;
+    height: 500px;
+    margin: 200px 0px 0px 10px;
+    @include flex(no);
+    &>div {
+        margin: 2px 40px;
+    }
+    div.left {
+        width: 450px;
+        height: 100%;
+        padding-top: 10px;
+        img {
+            position: absolute;
+            z-index: -2;
+            width: 450px;
+            height: 400px;
+        }
+        div.text {
+            color: white;
+            h2 {
+                padding: 10px 0px 5px;
+                font-weight: 300;
+                @include fsize(18);
+                @extend .upper;
+                text-align: center;
+            }
+            &>p {
+                @extend .upper;
+                text-align: center;
+                @include fsize(6);
+            }
+            div.contacts {
+                width: 100%;
+                padding: 10px 25px;
+                p {
+                    @include fsize(15);
+                    cursor: pointer;
+                    line-height: 60px;
+                    transition: all .5s ease;
+                    i {
+                        padding: 0px 10px 0px 0px;
+                        color: rgba(#FFD700, .7);
+                        font-style: normal;
+                    }
+                    &:hover {
+                        color: $do;
+                    }
+                }
+                div.socials {
+                    @include socials;
+                }
+            }
+        }
+    }
+    div.right {
+        width: 800px;
+        height: 100%;
+        form {
+            div.section1 {
+                display: flex;
+                input {
+                    width: 17vw;
+                }
+                div:nth-child(2) {
+                    margin: 0px 20px;
+                }
+            }
+            label {
+                text-transform: uppercase;
+                font-family: saira;
+                font-weight: 100;
+                @include fsize(15);
+            }
+            input,
+            textarea {
+                display: block;
+                border: none;
+                width: 80%;
+                border-bottom: 1px solid rgba(black, .5);
+                resize: none;
+                @include fsize(7);
+                &:hover,
+                &:focus:not(:nth-child(5)) {
+                    outline: none;
+                    border: none;
+                    border-bottom: 1px solid rgba($do, .7);
+                }
+                &[type="submit"] {
+                    @include mp;
+                    cursor: pointer;
+                    padding: 10px 0px;
+                    @include fsize(10);
+                    width: 20%;
+                    margin-top: 20px;
+                    transition: all .3s ease;
+                    text-transform: uppercase;
+                    border-bottom: none;
+                    border-radius: 2px;
+                    &:hover {
+                        transform: scale(1.1);
+                        background-color: rgba($do, .5);
+                    }
+                }
+            }
+            &>div {
+                margin: 13px 0px;
+            }
+        }
+    }
+}
+
+div.mailing {
+    @include flex(yes);
+    justify-content: unset;
+    height: 230px;
+    background-image: url("../images/mailimage.png");
+    background-repeat: no-repeat;
+    background-size: 100%;
+    color: white;
+    h2 {
+        @include fsize(28);
+        @extend .upper;
+        line-height: 55px;
+        font-weight: 100;
+        padding-top: 12px;
+    }
+    form {
+        width: 550px;
+        display: flex;
+        margin-top: 30px;
+        input[type="email"] {
+            width: 70%;
+            height: 50px;
+            @include input;
+            @include fsize(10);
+            border-top-right-radius: 0px;
+            border-bottom-right-radius: 0px;
+            &:placeholder-shown {
+                @include fsize(10);
+                padding-left: 20px;
+            }
+            &:focus,
+            &:active {
+                @include border(rgba($do, .8));
+                @include line;
+            }
+        }
+        input[type="submit"] {
+            width: 40%;
+            @include fsize(12);
+            @include input;
+            border-top-left-radius: 0px;
+            border-bottom-left-radius: 0px;
+            cursor: pointer;
+            background: rgba($do, .9);
+        }
+    }
+}
+
+footer {
+    background: linear-gradient(150deg, rgba(255, 215, 0, 0.03) 2.88%, rgba(255, 215, 0, 0.15) 100%);
+    height: 40vh;
+    @include flex(no);
+    justify-content: unset;
+    padding-top: 30px;
+    padding-bottom: 40px;
+    section.left {
+        padding-left: 100px;
+        width: 800px;
+        height: 100%;
+        @include flex(yes);
+        align-items: unset;
+        h2 {
+            @include header;
+            line-height: 70px;
+        }
+        >p {
+            @include fsize(13);
+            color: rgba($black, .5);
+        }
+        div.links {
+            margin: 10px 0px 0px 0px;
+            @include socials;
+        }
+    }
+    section.right {
+        width: 480px;
+        height: 100%;
+        @include flex(yes);
+        h2 {
+            line-height: 60px;
+            @include fsize(20);
+            font-weight: 200;
+        }
+        ul {
+            li {
+                list-style-type: none;
+                a {
+                    @include link;
+                    line-height: 40px;
+                    color: rgba($black, .7);
+                    @include fsize(15);
+                }
+            }
+        }
+    }
+}

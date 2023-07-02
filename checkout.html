@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="./vendors/vue.js"></script>
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+    <link rel="stylesheet" href="./vendors/fontawesome-free-5.15.1-web/css/all.min.css">
+    <link rel="shortcut icon" href="./resources/images/mealvalley.png" type="image/x-icon">
+    <link rel="stylesheet" href="./vendors/aos.css" />
+    <link rel="stylesheet" href="./resources/css/style.css">
+    <title>Checkout</title>
+    <script type="text/x-template" id="checkout-money">
+        <div class="checkout-money">
+            <div class="head">
+                <div class="name">
+                    <slot></slot>
+                    <img src="./resources/images/sim.png" :alt="title">
+                </div>
+                <div class="number">
+                    <p>****</p>
+                    <p>****</p>
+                    <p>****</p>
+                    <p>****</p>
+                    <p>0186</p>
+                </div>
+                <div class="holders">
+                    <div class="holder">
+                        <h4>CARD HOLDER</h4>
+                        <p>{{ holder }}</p>
+                    </div>
+                    <div class="holder">
+                        <h4>EXP</h4>
+                        <p>{{ exp }}</p>
+                    </div>
+                </div>
+            </div>
+            <div class="body">
+                <form action="#" method="POST">
+                    <div class="name">
+                        <label for="name">Card Holder</label>
+                        <input type="text" v-model="holder" required>
+                    </div>
+                    <div class="card">
+                        <label for="card">Credit card Number</label>
+                        <input type="number" required>
+                    </div>
+                    <div class="bottom">
+                        <div class="exp">
+                            <label for="exp">Exp Date</label>
+                            <input type="date" v-model="exp" required>
+                        </div>
+                        <div class="cvv">
+                            <label for="cvv">CVV</label>
+                            <input type="number" required>
+                        </div>
+                    </div>
+                    <input type="submit" value="PAY NOW">
+                </form>
+            </div>
+        </div>
+    </script>
+</head>
+
+<body id="body">
+    <nav data-aos="fade-up" data-aos-duration="1000">
+        <h1 id="header">
+            <p class="first">Meal</p>
+            <p class="second">Valley</p>
+        </h1>
+        <ul>
+            <li id="check">
+                <button :class="navClass" @click="nav"></button>
+            </li>
+        </ul>
+        <div class="nav" v-if="navVisible" v-bind:style="{ zIndex: navIndex }">
+            <ul>
+                <li><a href="./index.html"><i class="fas fa-home"></i>Home</a></li>
+                <li><a href="./about.html"><i class="fas fa-info-circle"></i>About</a></li>
+                <li><a href="./index.html#contact"><i class="fas fa-phone"></i>Contacts</a></li>
+                <li><a href="./index.html#testimonial"><i class="fas fa-quote-left"></i>Testimonials</a></li>
+                <li><a href="./about.html#shop"><i class="fas fa-shopping-bag"></i> Shop</a></li>
+                <li><a href="./about.html#team"><i class="fas fa-users"></i>Our Team</a></li>
+                <li><a href="./checkout.html"><i class="fas fa-cart-plus"></i>Checkout</a></li>
+            </ul>
+        </div>
+    </nav>
+    <div class="checkout" v-bind:style="{ opacity:opacity }" data-aos="fade-up" data-aos-duration="1000">
+        <div class="left">
+            <h2>Shopping Cart</h2>
+            <checkout-main :price="cprice" :header="header" :img="img" @decrease="decrease" @increase="increase" :checkout="checkout" @ccancel="ccancel" id="main">
+            </checkout-main>
+        </div>
+        <div class="right">
+            <div class="right_main">
+                <div class="food">
+                    <h3>Food</h3>
+                    <p>{{ foodTotal }}</p>
+                </div>
+                <div class="food">
+                    <h3>Delivery</h3>
+                    <p>{{ deliveryTotal }}</p>
+                </div>
+                <div class="food">
+                    <h3>Total</h3>
+                    <p>{{ total }}</p>
+                </div>
+            </div>
+            <div class="right_payments">
+                <h3>Accepted payment methods</h3>
+                <div class="right_payments-main">
+                    <i class="fab fa-cc-visa" id="pay_1"></i>
+                    <i class="fab fa-paypal" id="pay_2"></i>
+                    <i class="fab fa-cc-mastercard" id="pay_3"></i>
+                </div>
+            </div>
+            <div class="order">
+                <button>Order now</button>
+            </div>
+        </div>
+    </div>
+    <div class="payment-methods">
+        <checkout-money :holder="holder" :exp="exp" id="checkout_1">
+            <h3>VISA</h3>
+        </checkout-money>
+        <checkout-money :holder="holder" :exp="exp" id="checkout_2">
+            <h3>PAYPAL</h3>
+        </checkout-money>
+        <checkout-money :holder="holder" :exp="exp" id="checkout_3">
+            <h3>MASTERCARD</h3>
+        </checkout-money>
+    </div>
+    <script src="./resources/js/script.js"></script>
+    <script src="./resources/js/checkout.js"></script>
+    <script src="./vendors/aos.js"></script>
+    <script>
+        AOS.init();
+        app.component("checkout-main", {
+            props: {
+                number: String,
+                checkout: Array
+            },
+            template: `
+              <div class="checkout-food" v-for="check in checkout">
+                 <div class="checkout_left">
+                    <div class="left_main">
+                       <img :src="check.img" :alt="check.header" />
+                    </div>
+                 </div>
+                 <div class="checkout_right">
+                     <h2>{{ check.header }}</h2>
+                     <h3>An italian dish</h3>
+                     <div class="counter">
+                     <p>$ {{ check.price }}.00</p>
+                   <div class="counter_main">
+                   <button class="fas fa-minus" @click="$emit('decrease')"></button>
+                   <p id="number"> {{ check.counter }} </p>
+                   <button class="fas fa-plus"@click="$emit('increase')" id="increase"></button>
+                    </div>
+                    <i class="fas fa-times" @click=$emit('ccancel')></i>
+                   </div>
+                 </div>
+              </div>
+            `
+        })
+        app.component("checkout-money", {
+            props: {
+                holder: String,
+                exp: String
+            },
+            template: "#checkout-money"
+        })
+    </script>
+</body>
+
+</html>

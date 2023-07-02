@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0,user-scalable=0,maximum-scale=1">
+    <title>Meal Valley</title>
+    <link rel="stylesheet" href="./resources/css/style.css">
+    <link rel="stylesheet" href="./vendors/fontawesome-free-5.15.1-web/css/all.min.css">
+    <link rel="shortcut icon" href="./resources/images/mealvalley.png" type="image/x-icon">
+    <link rel="stylesheet" href="./vendors/aos.css" />
+    <script src="./vendors/vue.js"></script>
+    <script type="text/x-template" id="food-template">
+        <div v-for="entry in fElement" class="section" :id="entry.id">
+            <img :src="entry.imgLink" :alt="entry.name">
+            <h3>{{ entry.name }}</h3>
+            <p>{{ entry.descr }}</p>
+            <p style="opacity:0">{{ entry.price }}</p>
+            <p style="opacity:0">{{ entry.page }}</p>
+        </div>
+    </script>
+    <script type="text/x-template" id="testimonial">
+        <div v-for="col in columns" class="testimonial-section" v-bind:style="{right: pos}">
+            <div class="testimonial-title">
+                <div class="img">
+                    <img :src="col.imgLink" :alt="col.name">
+                </div>
+                <div class="testimonial-text">
+                    <h2>{{ col.name }}</h2>
+                    <h4>{{ col.title }}</h4>
+                </div>
+            </div>
+            <p>{{ col.text }}</p>
+            <div class="stars">
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <i class="fas fa-star"></i>
+                <p>(5.0)</p>
+            </div>
+        </div>
+    </script>
+</head>
+
+<body id="body">
+    <nav data-aos="fade-up" data-aos-duration="1000">
+        <h1>
+            <p class="first">Meal</p>
+            <p class="second">Valley</p>
+        </h1>
+        <ul>
+            <li>
+                <button @mouseover="show" @mouseout="hide">
+                    <i class="fas fa-search" v-if="onlyVisible"></i>
+                    <input placeholder="Search known foods" v-model="foodInput" v-if="searchVisible" v-focus>
+                </button>
+            </li>
+            <li>
+                <a href="#" class="fas fa-cart-plus"></a>
+            </li>
+            <li>
+                <button :class="navClass" @click="nav"></button>
+            </li>
+            <li><a href="#" class="button">Contact now</a></li>
+        </ul>
+        <div class="nav" v-if="navVisible" v-bind:style="{ zIndex: navIndex }">
+            <ul>
+                <li><a href="./index.html#home"><i class="fas fa-home"></i>Home</a></li>
+                <li><a href="./about.html"><i class="fas fa-info-circle"></i>About</a></li>
+                <li><a href="./index.html#contact"><i class="fas fa-phone"></i>Contacts</a></li>
+                <li><a href="./index.html#testimonial"><i class="fas fa-quote-left"></i>Testimonials</a></li>
+                <li><a href="./about.html/#shop"><i class="fas fa-shopping-bag"></i> Shop</a></li>
+                <li><a href="./about.html/#team"><i class="fas fa-users"></i>Our Team</a></li>
+            </ul>
+        </div>
+    </nav>
+    <div class="home" v-bind:style="{ opacity:opacity }" data-aos="fade-up" data-aos-duration="1000" id="home">
+        <div class="left" data-aos="fade-right" data-aos-duration="1000">
+            <h2>HEALTHY FOOD EQUALS HEALTHY LIFE</h2>
+            <p>Meal Valley is a world leading restaurant and food provider,it has branches in over 50 countries in the world,served at very important events in the world and companies. We are a world-class restaurant near you that provides food near you.Whether
+                it is breakfast,lucnh or dinner.Meal Valley got you covered as we provide you with yummy,healthy and delicious food</p>
+            <a href="#">ORDER NOW</a><br>
+            <div>
+                <img src="./resources/images/icon1.png" alt="icon1">
+                <img src="./resources/images/icon2.png" alt="icon2">
+                <img src="./resources/images/icon3.png" alt="icon3">
+            </div>
+        </div>
+        <div class="right">
+            <img src="./resources/images/homeimage.png" alt="homeiamge">
+        </div>
+    </div>
+    <div class="circle" v-bind:style="{opacity:opacity }"></div>
+    <div class="foods" v-bind:style="{ zIndex:zIndex, opacity:opacity }" data-aos="zoom-in" data-aos-duration="1000">
+        <h2>Our Popular Foods</h2>
+        <h4>home of good and healthy food</h4>
+        <div class="foods_main">
+            <known-food :entries="foodSet" :filter-Key="foodInput"></known-food>
+        </div>
+    </div>
+    <div class="circle2"></div>
+    <div class="testimonial" data-aos="zoom-in-up" data-aos-duration="1000" id="testimonial">
+        <div class="left">
+            <img src="./resources/images/testimonialpic.png" alt="testimonialpic">
+        </div>
+        <div class="right">
+            <h2>WHAT CUSTOMERS SAY ABOUT US</h2>
+            <div class="right_main">
+                <testimonial-component :columns=" testimonialSet" :pos="testRight"></testimonial-component>
+            </div>
+            <div class="controls">
+                <div @click="leftClick"> <button class="fas fa-arrow-left"></button></div>
+                <div @click="rightClick"> <button class="fas fa-arrow-right"></button></div>
+            </div>
+        </div>
+    </div>
+    <div class="circle3"></div>
+    <div class="contact" data-aos="zoom-in-right" data-aos-duration="1000" id="contact">
+        <div class="left">
+            <img src="./resources/images/contactimg.png" alt="contactimg">
+            <div class="text">
+                <h2>Contact Foodie</h2>
+                <p>Fill the form and our team will contact you within 24hrs</p>
+                <div class="contacts">
+                    <p @click="phone"><i class="fas fa-phone"></i> +2349054050533</p>
+                    <p @click="mail"><i class="fas fa-envelope"></i>webworld55220@gmail.com</p>
+                    <p><i class="fas fa-map-marker-alt"></i>Peru Road,Lagos State Nigeria</p>
+                    <social-comp></social-comp>
+                </div>
+            </div>
+        </div>
+        <div class="right">
+            <form method="POST" target="_blank" @submit="contactmail">
+                <div class="section1">
+                    <div>
+                        <label for="name">Name:</label>
+                        <input type="text" name="text" id="text1" v-model="text1" required>
+                    </div>
+                    <div>
+                        <label for="email">Email:</label>
+                        <input type="email" name="email" id="email" v-model="email" required>
+                    </div>
+                </div>
+                <div>
+                    <label for="phone">Phone Number:</label>
+                    <input type="tel" name="tel" id="tel" v-model="tel" required><br>
+                </div>
+                <div>
+                    <label for="reason">reason for contacting:</label>
+                    <input type="text" list="reasons" v-model="reasons" required>
+                    <datalist id="reasons">
+                    <option value="Ordering Foods">
+                    <option value="Making Enquiries">
+                    <option value="Complaints about our services">
+                    <option value="Complaints about customer care">
+                    <option value="other">
+               </datalist><br>
+                </div>
+                <div>
+                    <label for="message">Write your message:</label>
+                    <textarea name="message" id="message" v-model="message" required></textarea>
+                </div>
+                <input type="submit" value="Submit">
+            </form>
+        </div>
+    </div>
+    <remainder-part></remainder-part>
+    <script src="./resources/js/script.js"></script>
+    <script src="./resources/js/homeclick.js"></script>
+    <script src="./vendors/aos.js"></script>
+    <script>
+        AOS.init();
+    </script>
+</body>
+
+</html>

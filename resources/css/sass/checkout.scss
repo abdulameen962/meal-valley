@@ -1,0 +1,223 @@
+nav {
+    padding-top: 30px;
+    h1#header {
+        @include fsize(35);
+    }
+    ul {
+        li#check {
+            button {
+                @include fsize(30);
+                color: $do;
+            }
+        }
+    }
+}
+
+div.checkout {
+    @include flex(no);
+    margin-top: 40px;
+    &>div.left {
+        width: 700px;
+        height: 600px;
+        h2 {
+            @include fsize(25);
+            @extend .upper;
+            font-weight: 100;
+        }
+        div.checkout-food {
+            margin-top: 20px;
+            @include flex(no);
+            align-items: unset;
+            justify-content: unset;
+            div.checkout_left {
+                div.left_main {
+                    background: rgba(128, 128, 128, .05);
+                    @include flex(no);
+                    border-radius: 2px;
+                    padding: 30px;
+                    img {
+                        transform: scale(1.05);
+                    }
+                }
+            }
+            div.checkout_right {
+                padding-left: 15px;
+                h2 {
+                    @include fsize(25);
+                    font-weight: 100;
+                }
+                h3 {
+                    @include fsize(18);
+                    font-weight: 100;
+                    color: rgba($black, .5);
+                }
+                div.counter {
+                    padding-top: 70px;
+                    @include flex(no);
+                    justify-content: space-between;
+                    &>p {
+                        @include fsize(25);
+                    }
+                    &_main {
+                        @include flex(no);
+                        width: 110px;
+                        justify-content: space-between;
+                        @include fsize(15);
+                        button {
+                            @include fsize(15);
+                            background: rgba(128, 128, 128, .2);
+                            border: none;
+                            cursor: pointer;
+                            color: rgba(0, 0, 0, .5);
+                            padding: 6px;
+                        }
+                    }
+                }
+                i {
+                    @include fsize(20);
+                    cursor: pointer;
+                }
+            }
+        }
+    }
+    div.right {
+        width: 700px;
+        &_main {
+            background: $pcolor;
+            border-radius: 10px;
+            div.food {
+                @include flex(no);
+                padding: 20px 10px;
+                justify-content: space-between;
+                &:not(:last-child) {
+                    border-bottom: 1px solid rgba(0, 0, 0, .1);
+                }
+                h3 {
+                    @include fsize(18);
+                    font-family: saira;
+                    font-weight: 100;
+                    @extend .upper;
+                }
+            }
+        }
+        &_payments {
+            background: $pcolor;
+            padding: 20px 10px 20px;
+            border-radius: 10px;
+            margin-top: 15px;
+            h3 {
+                @include fsize(15);
+                font-weight: 100;
+                @extend .upper;
+            }
+            i {
+                @include fsize(28);
+                font-weight: 100;
+                cursor: pointer;
+                margin: 5px 7px;
+            }
+        }
+        div.order {
+            background-color: $pcolor;
+            border-radius: 10px;
+            margin-top: 15px;
+            padding: 20px 0px;
+            @include flex(no);
+            button {
+                background: none;
+                border: none;
+                cursor: pointer;
+                @include fsize(15);
+                border-radius: 5px;
+                padding: 8px 25px;
+                transition: all .3s ease;
+                background-color: rgba($do, .7);
+                &:hover {
+                    box-shadow: 0px 0px 30px rgba($black, .1);
+                }
+                &:active {
+                    box-shadow: none;
+                }
+            }
+        }
+    }
+}
+
+div.payment-methods {
+    border-radius: 12px;
+    width: 25vw;
+    height: 70vh;
+    position: relative;
+    left: 100px;
+    bottom: 100px;
+    div.checkout-money {
+        position: absolute;
+        width: 25vw;
+        visibility: hidden;
+        div.head {
+            background: rgba($do, .7);
+            @include flex(yes);
+            padding: 10px 0px 20px;
+            border-radius: 12px 12px 0px 0px;
+            color: white;
+            div.name {
+                @include flex(no);
+                justify-content: space-between;
+                width: 90%;
+                h3 {
+                    @include fsize(15);
+                    font-family: quick;
+                }
+                img {
+                    transform: scale(.7);
+                }
+            }
+            div.number {
+                @include flex(no);
+                justify-content: unset;
+                p {
+                    margin-left: 18px;
+                    @include fsize(18);
+                    font-family: quick;
+                }
+            }
+            div.holders {
+                width: 90%;
+                margin-top: 10px;
+                @include flex(no);
+                justify-content: space-between;
+                font-family: quick;
+                @include fsize(10);
+            }
+        }
+    }
+    div.body {
+        padding: 10px 20px 20px;
+        background: rgba(white, .5);
+        input {
+            display: block;
+            border: none;
+            outline: none;
+            border-bottom: 1px solid rgba($do, .8);
+            margin-top: 10px;
+            width: 95%;
+            @include fsize(10);
+            &[type="submit"] {
+                background: rgba($do, .8);
+                border: none;
+                width: 80%;
+                padding: 8px 0px;
+                border-radius: 5px;
+                cursor: pointer;
+                margin: 10px 0px 0px 25px;
+            }
+        }
+        label {
+            @include fsize(12);
+            font-family: quick;
+        }
+        div {
+            margin-top: 12px;
+        }
+    }
+}
